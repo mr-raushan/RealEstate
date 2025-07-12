@@ -98,3 +98,23 @@ export const login = async (req, res) => {
     });
   }
 };
+
+export const logout = async (req, res) => {
+  try {
+    return res
+      .status(200)
+      .clearCookie("token", {
+        sameSite: "strict",
+      })
+      .json({
+        message: "Logout successful",
+        success: true,
+      });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: "Internal server error",
+      success: false,
+    });
+  }
+};
